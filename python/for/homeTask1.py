@@ -5,7 +5,7 @@ while True:
     print(name + " " + "has been invited")
     a = input("Хотите позвать кого-то ещё? y/n: ")
     if a == "y":
-        counter = counter + 1
+        counter += 1
         continue
     elif a == "n":
         break
