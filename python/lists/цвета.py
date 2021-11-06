@@ -1,5 +1,4 @@
 colors1 = ["Красный","Оранжевый","Жёлтый","Зелёный", "Голубой","Синий","Фиолетовый"]
-a = print(int(input("от 0 до 3: ")))
-b = print(int(input("от 4 до 7: ")))
-colors2 = c [c = colors1[i] for i in range(a,b)]
-print(colors2)
+a = int(input("от 0 до 4: "))
+b = int(input("от 4 до 9: "))
+print(colors1([a:b]))

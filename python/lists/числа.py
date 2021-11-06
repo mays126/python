@@ -1,5 +1,6 @@
 nums = [111,222,333,444]
-print(nums,sep = "\n")
+for i in range(len(nums)):
+    print(nums[i])
 a = int(input("Введите число: "))
 for i in nums:
     if a == i:
