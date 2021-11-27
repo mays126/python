@@ -30,7 +30,7 @@ for i in range(10):
     e = random.randint(1,2)
     obj2.generator(e)
     print(obj2.doors)   
-    if print(obj2.MaksLen()) == "List if full!":
+    if print(obj2.MaksLen()) == "List is full!":
         break
 kolVoDoors = [0,1,2,3,4,5,6,7,8,9]
 while len(kolVoDoors) != 0:
@@ -53,7 +53,7 @@ while len(kolVoDoors) != 0:
                         break
                     else:
                         d = "GAME OVER"
-                        break                      
+                        exit()                      
                 else:
                     break                   
                 t += 1
