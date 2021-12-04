@@ -13,19 +13,15 @@ class Hero:
 class Artefact:
     def __init__(self):
         self.__power = random.randint(10,80)
-        print("Артефакт на месте")
 
     def power(self):
-        return __power
+        return self.__power
 class Monster:
     def __init__(self):
-        self.__power = random.randint(5,100)
-        print("Монстр на месте")
+        self.__power = random.randint(5,100)       
     def power(self):
         return self.__power
 hero = Hero()
-artefact = Artefact()
-monster = Monster()
 levels = [random.randint(0,1) for i in range(10)]
 attempts = []
 while True:
@@ -33,19 +29,19 @@ while True:
     attempts.append(random.randint(0,10))
     
     if levels[a] == 0:
-        b = random.randint(10,80)
-        hero.buff(b)
-        print("Герой был усилен на " + str(b) + " очков")
+        artefact = Artefact()
+        hero.buff(artefact.power())
+        print("Герой был усилен на " + str(artefact.power()) + " очков")
     else:
-        c = random.randint(5,100)
-        print("За дверью оказался монстр с силой в " + str(c) + " очков")
-        if hero.power() >= c:
+        monster = Monster()
+        print("За дверью оказался монстр с силой в " + str(monster.power()) + " очков")
+        if hero.power() >= monster.power():
             print("В этой схватке ты победил!")
         else:
             print("Ты проиграл в неравном бою!")
             exit()
     if len(attempts) >= 10:
-        print("Ты победил в этой схватке!")
+        print("Ты победил в этой битве!")
         break
 
 
