@@ -1,4 +1,4 @@
-arr = []
+
 
 def sum_num(n):
     if n > 0:
@@ -13,11 +13,9 @@ def nums(k,s):
     for i in range(10**c, 10**k):
         if sum_num(i) == s:
             d += 1
-            arr.append(d)
+    return d        
 
 a = int(input('>>>'))
 b = int(input('>>>'))
-nums(a,b)
+print(nums(a,b))
 
-arr.sort(reverse=True)
-print(arr[0])
