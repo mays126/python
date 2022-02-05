@@ -120,10 +120,10 @@ def selectFromNames(name):
             sqlite_connection.close()
             print("Соединение с SQLite закрыто")
 
-def printAuthorRecords(authorRecords):
+def printRecords(records):
     try:
         print()
-        for record in authorRecords:
+        for record in records:
             print('ID:',record[0])
             print('Название:',record[1])
             print('Автор:',record[2])
@@ -132,29 +132,6 @@ def printAuthorRecords(authorRecords):
     except TypeError:
         print("Никаких данных не возвращенно.")
 
-def printCountRecords(countRecords):
-    try:
-        print()
-        for record in countRecords:
-            print('ID:',record[0])
-            print('Название:',record[1])
-            print('Автор:',record[2])
-            print('Кол-во томов:',record[3])
-            print()
-    except TypeError:
-        print("Никаких данных не возвращенно.")
-
-def printNameRecords(nameRecords):
-    try:
-        print()
-        for record in nameRecords:
-            print('ID:',record[0])
-            print('Название:',record[1])
-            print('Автор:',record[2])
-            print('Кол-во томов:',record[3])
-            print()
-    except TypeError:
-        print("Никаких данных не возвращенно.")
 
 authorInput = input("Введите автора книги: ")
 countInput = int(input('Введите кол-во томов в книге: '))
@@ -167,8 +144,8 @@ booksAndNames = selectFromNames(nameInput)
 print('Выборки: ')
 print()
 print('По автору: ')
-printAuthorRecords(books)   
+printRecords(books)   
 print('По количеству томов: ')    
-printCountRecords(booksAndCounts)
+printRecords(booksAndCounts)
 print('Вывод по названию: ')
-printNameRecords(booksAndNames)
+printRecords(booksAndNames)
