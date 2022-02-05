@@ -18,4 +18,3 @@ def nums(k,s):
 a = int(input('>>>'))
 b = int(input('>>>'))
 print(nums(a,b))
-

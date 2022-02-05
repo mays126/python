@@ -1,0 +1,11 @@
+CREATE TABLE IF NOT EXISTS notes (
+    id INTEGER PRIMARY KEY,
+    note FLOAT,
+    student_id INTEGER NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS tasks(
+    id INTEGER PRIMARY KEY,
+    task TEXT NOT NULL,
+    student_id INTEGER NOT NULL
+);
