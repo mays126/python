@@ -121,6 +121,7 @@ def selectFromNames(name):
             print("Соединение с SQLite закрыто")
 
 def printRecords(records):
+
     try:
         print()
         for record in records:
@@ -132,6 +133,37 @@ def printRecords(records):
     except TypeError:
         print("Никаких данных не возвращенно.")
 
+def maxID():
+    try:
+        sqlite_connection = sqlite3.connect('homeTask_sqlite.db')
+        cursor = sqlite_connection.cursor()
+        print('Соединение с базой данных прошло успешно.')
+
+        sqlite_selection_query = "SELECT MAX(id) FROM books;"
+        cursor.execute(sqlite_selection_query)
+        record = cursor.fetchone()
+        cursor.close()
+        return record[0]
+    except sqlite3.Error as error:
+        print("Не удалось выбрать данные из таблицы.", error)
+    finally:
+        if sqlite_connection:
+            sqlite_connection.close()
+            print("Соединение с SQLite закрыто")
+
+def makingRecords():
+    records = []
+    while True:
+        records.append((
+            maxID() + 1,
+            input('Название книги: '),
+            input('Автор книги: '),
+            int(input('Кол-во томов: '))
+        ))
+        question = input('Выйти? y/n: ')
+        if question == 'y':
+            return records
+
 
 authorInput = input("Введите автора книги: ")
 countInput = int(input('Введите кол-во томов в книге: '))
@@ -141,7 +173,7 @@ books = recordAuthor(authorInput)
 booksAndCounts = recordCount(countInput)
 booksAndNames = selectFromNames(nameInput)
 
-print('Выборки: ')
+insert(makingRecords())
 print()
 print('По автору: ')
 printRecords(books)   
@@ -149,3 +181,4 @@ print('По количеству томов: ')
 printRecords(booksAndCounts)
 print('Вывод по названию: ')
 printRecords(booksAndNames)
+printRecords(SelectTable())
