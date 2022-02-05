@@ -1,25 +1,9 @@
+from itertools import count
 import sqlite3
-
-def VersionCheck():
-    try:
-        sqlite_connection = sqlite3.connect('homeTask_sqlite.db')
-        cursor = sqlite_connection.cursor()
-        print('База данных успешно созданна.')
-
-        sqlite_selection_version_query = "SELECT sqlite_version()"
-        cursor.execute(sqlite_selection_version_query)
-        record = cursor.fetchall()
-        print("Версия SQLite:", record[0][0])
-        cursor.close()
-    except sqlite3.Error as error:
-        print("Не удалось подключиться к SQLite", error)
-    finally:
-        if sqlite_connection:
-            sqlite_connection.close()
-            print("Соединение с SQLite закрыто")       
 
 
 def script(name_file):
+    print()
     try:
         sqlite_connection = sqlite3.connect('homeTask_sqlite.db')
         cursor = sqlite_connection.cursor()
@@ -44,6 +28,7 @@ def script(name_file):
             print("Соединение с SQLite закрыто")
 
 def insert(records):
+    print()
     try:
         sqlite_connection = sqlite3.connect('homeTask_sqlite.db')
         cursor = sqlite_connection.cursor()
@@ -61,6 +46,7 @@ def insert(records):
         if sqlite_connection:
             sqlite_connection.close()
             print("Соединение с SQLite закрыто")
+    print()        
 
 def SelectTable():
     try:
@@ -116,7 +102,7 @@ def recordCount(count):
             sqlite_connection.close()
             print("Соединение с SQLite закрыто")
 
-def selectRecords(name):
+def selectFromNames(name):
     try:
         sqlite_connection = sqlite3.connect('homeTask_sqlite.db')
         cursor = sqlite_connection.cursor()
@@ -134,49 +120,55 @@ def selectRecords(name):
             sqlite_connection.close()
             print("Соединение с SQLite закрыто")
 
-a = input("Введите автора книги: ")
-b = int(input('Введите кол-во томов в книге: '))
-c = input('Введите название книги: ')
+def printAuthorRecords(authorRecords):
+    try:
+        print()
+        for record in authorRecords:
+            print('ID:',record[0])
+            print('Название:',record[1])
+            print('Автор:',record[2])
+            print('Кол-во томов:',record[3])
+            print()
+    except TypeError:
+        print("Никаких данных не возвращенно.")
 
-books = recordAuthor(a)
-booksAndCounts = recordCount(b)
-booksAndNames = selectRecords(c)
+def printCountRecords(countRecords):
+    try:
+        print()
+        for record in countRecords:
+            print('ID:',record[0])
+            print('Название:',record[1])
+            print('Автор:',record[2])
+            print('Кол-во томов:',record[3])
+            print()
+    except TypeError:
+        print("Никаких данных не возвращенно.")
 
+def printNameRecords(nameRecords):
+    try:
+        print()
+        for record in nameRecords:
+            print('ID:',record[0])
+            print('Название:',record[1])
+            print('Автор:',record[2])
+            print('Кол-во томов:',record[3])
+            print()
+    except TypeError:
+        print("Никаких данных не возвращенно.")
 
-VersionCheck()
-print()
-print('Создание таблиц: ')
-print()
-script('ht_tables.sql')
-print()
-print('Ввод данных в таблицы: ')
-print()
-insert(books)
+authorInput = input("Введите автора книги: ")
+countInput = int(input('Введите кол-во томов в книге: '))
+nameInput = input('Введите название книги: ')
+
+books = recordAuthor(authorInput)
+booksAndCounts = recordCount(countInput)
+booksAndNames = selectFromNames(nameInput)
+
 print('Выборки: ')
 print()
 print('По автору: ')
-print()
-for book in books:
-    print('ID:',book[0])
-    print('Название:',book[1])
-    print('Автор:',book[2])
-    print('Кол-во томов:',book[3])
-    print()
-print()    
-print('По количеству томов: ')
-print()    
-for book in booksAndCounts:
-    print('ID:',book[0])
-    print('Название:',book[1])
-    print('Автор:',book[2])
-    print('Кол-во томов:',book[3])
-    print()
-print()
+printAuthorRecords(books)   
+print('По количеству томов: ')    
+printCountRecords(booksAndCounts)
 print('Вывод по названию: ')
-print()
-for book in booksAndNames:
-    print('ID:',book[0])
-    print('Название:',book[1])
-    print('Автор:',book[2])
-    print('Кол-во томов:',book[3])
-    print()
+printNameRecords(booksAndNames)
