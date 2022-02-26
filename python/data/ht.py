@@ -164,21 +164,60 @@ def makingRecords():
         if question == 'y':
             return records
 
+def UpdateRecord(name,id):
+    try:
+        sqlite_connection = sqlite3.connect('homeTask_sqlite.db')
+        cursor = sqlite_connection.cursor()
+        print('Соединение с базой данных прошло успешно.')
 
-authorInput = input("Введите автора книги: ")
-countInput = int(input('Введите кол-во томов в книге: '))
-nameInput = input('Введите название книги: ')
+        sqlite_selection_query = "UPDATE books SET book_name=? WHERE id=?;"
+        cursor.execute(sqlite_selection_query,(name,id))
+        sqlite_connection.commit()
+        print('Запись', id, 'успешно обновленна')
+    except sqlite3.Error as error:
+        print("Не удалось выбрать данные по количеству томов", error)
+    finally:
+        if sqlite_connection:
+            sqlite_connection.close()
+            print("Соединение с SQLite закрыто")
 
-books = recordAuthor(authorInput)
-booksAndCounts = recordCount(countInput)
-booksAndNames = selectFromNames(nameInput)
+def deleteRecord(id):
+    try:
+        sqlite_connection = sqlite3.connect('homeTask_sqlite.db')
+        cursor = sqlite_connection.cursor()
+        print('Соединение с базой данных прошло успешно.')
 
-insert(makingRecords())
-print()
-print('По автору: ')
-printRecords(books)   
-print('По количеству томов: ')    
-printRecords(booksAndCounts)
-print('Вывод по названию: ')
-printRecords(booksAndNames)
+        sqlite_delete_query = "DELETE FROM books WHERE id=?;"
+        cursor.execute(sqlite_delete_query,(id,))
+        sqlite_connection.commit()
+        print('Запись', id, 'успешно удалена')
+    except sqlite3.Error as error:
+        print("Не удалось выбрать данные по количеству томов", error)
+    finally:
+        if sqlite_connection:
+            sqlite_connection.close()
+            print("Соединение с SQLite закрыто")
+
+
+
+# authorInput = input("Введите автора книги: ")
+# countInput = int(input('Введите кол-во томов в книге: '))
+# nameInput = input('Введите название книги: ')
+
+# books = recordAuthor(authorInput)
+# booksAndCounts = recordCount(countInput)
+# booksAndNames = selectFromNames(nameInput)
+
+# insert(makingRecords())
+# print()
+# print('По автору: ')
+# printRecords(books)   
+# print('По количеству томов: ')    
+# printRecords(booksAndCounts)
+# print('Вывод по названию: ')
+# printRecords(booksAndNames)
 printRecords(SelectTable())
+
+deleteRecord(18)
+
+print(SelectTable())
