@@ -10,12 +10,11 @@ CREATE TABLE IF NOT EXISTS visitors(
     tel_number INTEGER PRIMARY KEY,
     visitor_name TEXT NOT NULL,
     surname TEXT NOT NULL,
-    adress TEXT NOT NULL,
-    registred_book_name TEXT NOT NULL
+    adress TEXT NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS registred_books(
     id INTEGER PRIMARY KEY,
     book TEXT NOT NULL,
-    visitor TEXT NOT NULL
+    visitor INTEGER NOT NULL
 );
