@@ -1,0 +1,1 @@
+from keyboards.keyboards import kb_main,kb_vis,kb_books,kb_regs,kb_cancel
